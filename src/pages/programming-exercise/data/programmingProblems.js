@@ -49,11 +49,26 @@ export const programmingProblems = [
       *   \`-10^9 <= target <= 10^9\`
       *   Only one valid answer exists.
     `),
-        starterCode: `
-function twoSum(nums, target) {
-  // Write your code here
-};
-`,
+        starterCode: {
+            javascript: dedent(`
+        function twoSum(nums, target) {
+          // Write your JavaScript code here
+        };
+      `),
+            python: dedent(`
+        def twoSum(nums, target):
+            # Write your Python code here
+            pass
+      `),
+            java: dedent(`
+        class Solution {
+            public int[] twoSum(int[] nums, int target) {
+                // Write your Java code here
+                return new int[]{};
+            }
+        }
+      `),
+        },
     },
     {
         id: "2",
@@ -79,11 +94,25 @@ function twoSum(nums, target) {
       *   \`1 <= s.length <= 10^5\`
       *   \`s[i]\` is a printable ascii character.
     `),
-        starterCode: `
-function reverseString(s) {
-  // Write your code here
-};
-`,
+        starterCode: {
+            javascript: dedent(`
+        function reverseString(s) {
+          // Write your JavaScript code here
+        };
+      `),
+            python: dedent(`
+        def reverseString(s):
+            # Write your Python code here
+            pass
+      `),
+            java: dedent(`
+        class Solution {
+            public void reverseString(char[] s) {
+                // Write your Java code here
+            }
+        }
+      `),
+        },
     },
     {
         id: "3",
@@ -110,10 +139,25 @@ function reverseString(s) {
       **Constraints:**
       *   \`-2^31 <= x <= 2^31 - 1\`
     `),
-        starterCode: `
-function isPalindrome(x) {
-  // Write your code here
-};
-`,
+        starterCode: {
+            javascript: dedent(`
+        function isPalindrome(x) {
+          // Write your JavaScript code here
+        };
+      `),
+            python: dedent(`
+        def isPalindrome(x):
+            # Write your Python code here
+            pass
+      `),
+            java: dedent(`
+        class Solution {
+            public boolean isPalindrome(int x) {
+                // Write your Java code here
+                return false;
+            }
+        }
+      `),
+        },
     },
 ]

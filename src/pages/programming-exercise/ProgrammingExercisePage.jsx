@@ -41,17 +41,25 @@ export default function ProgrammingExercisePage() {
         const randomIndex = Math.floor(Math.random() * programmingProblems.length)
         const problem = programmingProblems[randomIndex]
         setCurrentProblem(problem)
-        setCode(problem.starterCode.trim()) // Set starter code for the problem
+        // Set starter code for the problem based on the current language
+        setCode(problem.starterCode[language] || problem.starterCode.javascript) // Fallback to JS if language not found
     }
 
-    const handleCodeChange = useCallback((e) => {
-        setCode(e.target.value)
+    const handleCodeChange = useCallback((value) => {
+        setCode(value)
     }, [])
 
-    const handleLanguageChange = useCallback((e) => {
-        setLanguage(e.target.value)
-        // In a real app, you'd load starter code for the selected language
-    }, [])
+    const handleLanguageChange = useCallback(
+        (e) => {
+            const newLanguage = e.target.value
+            setLanguage(newLanguage)
+            // Update code with starter code for the new language
+            if (currentProblem) {
+                setCode(currentProblem.starterCode[newLanguage] || currentProblem.starterCode.javascript) // Fallback to JS
+            }
+        },
+        [currentProblem],
+    ) // Add currentProblem to dependencies
 
     const handleRunCode = useCallback(() => {
         alert("Running code... (This is a mock function)")

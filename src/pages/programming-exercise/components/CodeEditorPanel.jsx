@@ -1,4 +1,11 @@
 import { Box, Button, Paper, Select, MenuItem, FormControl, InputLabel } from "@mui/material"
+import Editor from "react-simple-code-editor"
+import { highlight, languages } from "prismjs/components/prism-core"
+import "prismjs/components/prism-clike"
+import "prismjs/components/prism-javascript"
+import "prismjs/components/prism-python"
+import "prismjs/components/prism-java"
+import "prismjs/themes/prism-dark.css" // Import a dark theme for Prism.js
 
 export default function CodeEditorPanel({
                                             code,
@@ -10,6 +17,12 @@ export default function CodeEditorPanel({
                                             loadRandomProblem,
                                             theme,
                                         }) {
+    const highlightCode = (codeToHighlight, lang) => {
+        // Ensure the language is loaded, default to javascript if not found
+        const languageGrammar = languages[lang] || languages.javascript
+        return highlight(codeToHighlight, languageGrammar, lang)
+    }
+
     return (
         <Paper
             sx={{
@@ -63,25 +76,30 @@ export default function CodeEditorPanel({
                     New Problem
                 </Button>
             </Box>
-            <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-        <textarea
-            value={code}
-            onChange={handleCodeChange}
-            style={{
-                flexGrow: 1,
-                width: "100%",
-                border: "none",
-                outline: "none",
-                backgroundColor: theme.palette.background.default, // Darker background for editor
-                color: theme.palette.text.primary,
-                fontFamily: "monospace",
-                fontSize: "0.9rem",
-                padding: "16px",
-                resize: "none", // Disable textarea resize
-                boxSizing: "border-box",
-            }}
-            spellCheck="false"
-        />
+            <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column", position: "relative" }}>
+                <Editor
+                    value={code}
+                    onValueChange={handleCodeChange}
+                    highlight={(codeToHighlight) => highlightCode(codeToHighlight, language)}
+                    padding={16}
+                    style={{
+                        flexGrow: 1,
+                        width: "100%",
+                        minHeight: "100%", // Ensure editor takes full height
+                        fontFamily: "monospace",
+                        fontSize: "0.9rem",
+                        backgroundColor: theme.palette.background.default, // Darker background for editor
+                        color: theme.palette.text.primary,
+                        lineHeight: "1.5em",
+                        outline: "none",
+                        border: "none",
+                        boxSizing: "border-box",
+                        // Override Prism.js default background if necessary
+                        "& .token.comment": { color: "#6a9955" }, // Example: custom comment color
+                        "& .token.keyword": { color: "#569cd6" }, // Example: custom keyword color
+                        // Add more custom styles for Prism tokens if needed
+                    }}
+                />
             </Box>
             <Box
                 sx={{
