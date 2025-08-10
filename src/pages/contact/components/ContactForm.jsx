@@ -1,9 +1,11 @@
+"use client"
+
 import { useState } from "react"
 import { TextField, Button, Typography, Box } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 import emailjs from "@emailjs/browser" // Import EmailJS library
 
-export default function ContactPage() {
+export default function ContactForm() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -27,16 +29,20 @@ export default function ContactPage() {
         setIsSubmitting(true)
         setSubmissionStatus(null)
 
-        const serviceId = "service_tev1iff"
-        const publicKey = "qOU7GzjuQxELKHNv0"
+        // 替换为您的实际 EmailJS Service ID 和 Public Key
+        const serviceId = "service_tev1iff" // 您的 Service ID
+        const publicKey = "qOU7GzjuQxELKHNv0" // 您的 Public Key
 
-        const autoReplyTemplateId = "template_4clo1yh"
-        const notificationTemplateId = "template_l69hp5f" // 例如: 'template_notification_to_me'
+        // 替换为您的两个模板的 ID
+        const autoReplyTemplateId = "template_4clo1yh" // 自动回复模板 ID
+        const notificationTemplateId = "template_l69hp5f" // 通知模板 ID (发送到您的邮箱)
 
         try {
+            // 1. 发送自动回复给用户
             await emailjs.send(serviceId, autoReplyTemplateId, formData, publicKey)
             console.log("Auto-reply sent to user:", formData.email)
 
+            // 2. 发送通知邮件到您的邮箱
             await emailjs.send(serviceId, notificationTemplateId, formData, publicKey)
             console.log("Notification email sent to your Gmail.")
 
@@ -61,13 +67,13 @@ export default function ContactPage() {
             sx={{
                 width: "100%",
                 maxWidth: 600, // Increased max-width for a more "page-like" feel
-                padding: { xs: 3, sm: 5, md: 8 }, // Responsive padding
+                // Removed padding here as it will be handled by the parent ContactPage layout
                 boxSizing: "border-box",
                 display: "flex",
                 flexDirection: "column", // Allow content to stack vertically
                 alignItems: "center", // Center content horizontally
                 justifyContent: "center", // Center content vertically if space allows
-                minHeight: "100vh", // Ensure it takes full height for centering
+                // Removed minHeight here as it will be handled by the parent ContactPage layout
             }}
         >
             <Box sx={{ textAlign: "center", marginBottom: { xs: 4, sm: 6 } }}>
@@ -92,17 +98,9 @@ export default function ContactPage() {
                     </Box>
                     <Box component="span" sx={{ color: currentTheme.palette.text.primary }}>
                         t
-                    </Box>{" "}
-                    <Box component="span" sx={{ color: currentTheme.palette.text.secondary }}>
-                        U
-                    </Box>
-                    <Box component="span" sx={{ color: currentTheme.palette.text.secondary }}>
-                        s
                     </Box>
                 </Typography>
-                <Typography variant="subtitle1" sx={{ color: "text.secondary", fontSize: { xs: "0.9rem", sm: "1.1rem" } }}>
-                    We'd love to hear from you!
-                </Typography>
+             
             </Box>
             <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%", "& > :not(style)": { marginBottom: 3 } }}>
                 <TextField
@@ -168,4 +166,3 @@ export default function ContactPage() {
         </Box>
     )
 }
-   

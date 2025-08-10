@@ -8,7 +8,7 @@ const theme = createTheme({
         },
         background: {
             default: "#000000", // Pure black background like Apple
-            paper: "#1a1a1a", // Slightly lighter black for card/paper
+            paper: "#1a1a1a", // Slightly lighter black for input backgrounds, etc.
         },
         text: {
             primary: "#f5f5f7", // Light text
@@ -26,6 +26,11 @@ const theme = createTheme({
         },
         googleGreen: {
             main: "#34A853",
+        },
+        // New color for Get Started button
+        turquoise: {
+            main: "#00E0C7", // A vibrant turquoise color
+            contrastText: "#000000", // Black text for contrast
         },
     },
     typography: {
