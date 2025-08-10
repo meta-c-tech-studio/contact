@@ -3,7 +3,7 @@ import './App.css';
 import { Routes, Route, useLocation, BrowserRouter} from "react-router-dom";
 function App() {
   return (
-      <BrowserRouter basename={"/contact"} >
+      <BrowserRouter  >
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
