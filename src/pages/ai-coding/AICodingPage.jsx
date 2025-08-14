@@ -28,7 +28,7 @@ export default function AICodingPage() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer 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`,
+                    Authorization: `Bearer ${process.env.GREACT_APP_GROQ_API_KEY}`,
                 },
                 body: JSON.stringify({
                     model: "llama-3.1-8b-instant",
