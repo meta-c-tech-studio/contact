@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-app-rewired  start",
+    "start": "dotenv -e .env.local react-app-rewired  start",
     "build": "dotenv -e .env.production  react-app-rewired  build",
     "test": "react-app-rewired  test",
     "eject": "react-scripts eject",
