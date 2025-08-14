@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material"
-import Header from "../../components/Header.jsx"
-import Footer from "../../components/Footer.jsx"
+import Header from "../../components/Header"
+import Footer from "../../components/Footer"
 import BlogCard from "./components/BlogCard";
 
-// Define your blog post data here
+// Update the blog post data
 const blogPosts = [
     {
         id: "1",
@@ -12,13 +12,13 @@ const blogPosts = [
             "Explore the fundamentals of data pipelines, their stages, and why they are crucial for modern data processing and analysis.",
         slug: "understanding-data-pipelines",
     },
-    // Add more blog posts here as you create them
-    // {
-    //   id: "2",
-    //   title: "The Future of AI in Coding",
-    //   summary: "Discover how artificial intelligence is transforming software development and what to expect next.",
-    //   slug: "future-of-ai-in-coding",
-    // },
+    {
+        id: "2",
+        title: "Scalable Architecture",
+        summary:
+            "Deep dive into the Scale Cube framework covering X-axis horizontal scaling, Y-axis services decomposition, and Z-axis data sharding for building robust, scalable systems.",
+        slug: "scalable-architecture-three-dimensions",
+    },
 ]
 
 export default function BlogPage() {
@@ -52,7 +52,7 @@ export default function BlogPage() {
                         fontSize: { xs: "2.5rem", sm: "3rem", md: "4rem" },
                     }}
                 >
-                    Blog
+                    Our Blog
                 </Typography>
                 {/* Render blog cards */}
                 {blogPosts.map((post) => (

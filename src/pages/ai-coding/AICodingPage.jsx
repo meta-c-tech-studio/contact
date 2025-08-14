@@ -125,7 +125,7 @@ export default function AICodingPage() {
                         AI Code Generator
                     </Typography>
                     <Typography variant="body1" sx={{ color: theme.palette.text.secondary, marginBottom: 2 }}>
-                        Describe the code you need, and our AI will generate it for you using Groq's free API.
+                        Describe the code you need, and our AI will generate it for you using Groq's model.
                     </Typography>
 
                 
