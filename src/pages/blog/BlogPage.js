@@ -52,7 +52,7 @@ export default function BlogPage() {
                         fontSize: { xs: "2.5rem", sm: "3rem", md: "4rem" },
                     }}
                 >
-                    Our Blog
+                    Blog
                 </Typography>
                 {/* Render blog cards */}
                 {blogPosts.map((post) => (
