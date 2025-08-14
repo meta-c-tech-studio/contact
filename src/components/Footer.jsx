@@ -1,16 +1,17 @@
+"use client"
+
 import { Box, Typography, Link, Grid } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 
 export default function Footer() {
     const theme = useTheme()
     const currentYear = new Date().getFullYear()
-
     const footerLinks = [
         {
             title: "Playground",
             links: [
                 { name: "Programming Exercise", href: "/programming-exercise" },
-                { name: "AI coding", href: "#" },
+                { name: "AI coding", href: "/ai-coding" },
                 { name: "Blog", href: "/blog" },
                 { name: "Integrations", href: "#" },
             ],
@@ -31,7 +32,6 @@ export default function Footer() {
             ],
         },
     ]
-
     return (
         <Box
             sx={{
@@ -60,22 +60,23 @@ export default function Footer() {
                     {/* Left section with Logo */}
                     <Grid item xs={12} md={4} sx={{ textAlign: { xs: "center", md: "left" } }}>
                         {" "}
-                        {/* Center on small, left on medium+ */}
+                        {/* 修正了 'asx' 为 'sx' */} {/* Center on small, left on medium+ */}
                         <Box sx={{ marginBottom: 2 }}>
-                            <img
-                                src="/googleusercropped_circle_image.png" // Corrected path
-                                alt="Company Logo"
-                                style={{
-                                    width: 60, // Adjust size as needed
-                                    height: 60, // Adjust size as needed
-                                    borderRadius: "50%", // Make it circular
-                                    display: "block", // Ensure it takes up its own line
-                                    margin: { xs: "0 auto", md: "0" }, // Center on small, left on medium+
-                                    marginBottom: theme.spacing(1), // Space between logo and text
-                                }}
-                            />
+                            <Link href={"/"}>
+                                <img
+                                    src="/googleusercropped_circle_image.png" // 保持原路径
+                                    alt="Company Logo"
+                                    style={{
+                                        width: 60, // Adjust size as needed
+                                        height: 60, // Adjust size as needed
+                                        borderRadius: "50%", // Make it circular
+                                        display: "block", // Ensure it takes up its own line
+                                        margin: { xs: "0 auto", md: "0" }, // Center on small, left on medium+
+                                        marginBottom: theme.spacing(1), // Space between logo and text
+                                    }}
+                                />
+                            </Link>
                         </Box>
-                       
                         <Typography variant="body2" sx={{ margin: { xs: "0 auto 16px", md: "0" } }}>
                             Making things simple.
                         </Typography>
@@ -84,7 +85,7 @@ export default function Footer() {
                     {footerLinks.map((column, index) => (
                         <Grid item xs={6} sm={4} md={2} key={index} sx={{ textAlign: { xs: "center", md: "right" } }}>
                             {" "}
-                            {/* Center on small, right on medium+ */}
+                            {/* 移除了 marginTop={{xs:0,sm:-3}} */} {/* Center on small, right on medium+ */}
                             <Typography
                                 variant="subtitle1"
                                 sx={{
@@ -117,7 +118,6 @@ export default function Footer() {
                     ))}
                 </Grid>
             </Box>
-
             {/* Copyright section */}
             <Box
                 sx={{

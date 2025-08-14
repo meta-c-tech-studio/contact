@@ -5,7 +5,7 @@ export default function Header() {
     const theme = useTheme()
     const navLinks = [
         { name: "Programming Exercise", href: "/programming-exercise" },
-        { name: "AI coding", href: "#" },
+        { name: "AI Coding", href: "/ai-coding" }, // New AI Coding link
         { name: "Blog", href: "/blog" },
     ]
 
@@ -37,7 +37,9 @@ export default function Header() {
             </Typography>
 
             {/* Navigation Links and Button */}
-            <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 2, sm: 4 } }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1, sm: 4 } }}>
+                {" "}
+                {/* Modified gap */}
                 {navLinks.map((link) => (
                     <Link
                         key={link.name}
@@ -51,13 +53,13 @@ export default function Header() {
                             "&:hover": {
                                 color: theme.palette.primary.main, // Apple blue on hover
                             },
-                            display: { xs: "none", sm: "block" }, // Hide on extra small screens
+                            display: "block", // Modified to be visible on mobile
                         }}
                     >
                         {link.name}
                     </Link>
                 ))}
-   
+
             </Box>
         </Box>
     )

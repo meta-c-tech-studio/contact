@@ -11,12 +11,14 @@ export default function ProblemDescriptionPanel({ currentProblem, theme }) {
         <Paper
             sx={{
                 height: "100%",
-                overflowY: "auto",
+                overflowY: "auto", // Always enable vertical scrolling
                 padding: 3,
                 backgroundColor: theme.palette.background.paper,
                 color: theme.palette.text.primary,
                 borderRadius: 2,
                 boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+                // Ensure scrolling works on mobile
+                WebkitOverflowScrolling: "touch", // Smooth scrolling on iOS
                 // Styles for Markdown elements
                 "& p": {
                     marginBottom: "1em",
