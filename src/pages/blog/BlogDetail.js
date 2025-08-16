@@ -1,21 +1,18 @@
+"use client"
+
 import { useParams } from "react-router-dom"
 import { Box, Typography } from "@mui/material"
 import Header from "../../components/Header.jsx"
 import Footer from "../../components/Footer.jsx"
-import ScalableArchitectureBlog from "./lists/scalable-architecture-blog"
-import DataPipelineBlog from "./lists/data-pipline-blog"; 
-const blogComponents = {
-    "understanding-data-pipelines": DataPipelineBlog,
-    "scalable-architecture-three-dimensions": ScalableArchitectureBlog,
-    // Add other blog components here as you create them
-    // "another-blog-post": AnotherBlogPostComponent,
-}
+import { getBlogPostBySlug, getBlogComponents } from "./components/blogRegistry"
 
 export default function BlogDetail() {
     const { slug } = useParams()
+    const blogPost = getBlogPostBySlug(slug)
+    const blogComponents = getBlogComponents()
     const BlogPostComponent = blogComponents[slug]
 
-    if (!BlogPostComponent) {
+    if (!BlogPostComponent || !blogPost) {
         return (
             <Box
                 sx={{

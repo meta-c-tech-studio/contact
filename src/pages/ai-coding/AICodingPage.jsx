@@ -4,7 +4,6 @@ import { useTheme } from "@mui/material/styles"
 import Header from "../../components/Header.jsx"
 import Footer from "../../components/Footer.jsx"
 import AICodeOutput from "./components/AICodeOutput.jsx"
-
 export default function AICodingPage() {
     const theme = useTheme()
     const [prompt, setPrompt] = useState("")
@@ -23,12 +22,11 @@ export default function AICodingPage() {
         setGeneratedCode("") // Clear previous code
 
         try {
-            // Call Groq API directly
             const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${process.env.GREACT_APP_GROQ_API_KEY}`,
+                    Authorization: `Bearer ${process.env.REACT_APP_GROQ_API_KEY}`,
                 },
                 body: JSON.stringify({
                     model: "llama-3.1-8b-instant",

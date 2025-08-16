@@ -100,7 +100,6 @@ export default function ContactForm() {
                         t
                     </Box>
                 </Typography>
-             
             </Box>
             <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%", "& > :not(style)": { marginBottom: 3 } }}>
                 <TextField

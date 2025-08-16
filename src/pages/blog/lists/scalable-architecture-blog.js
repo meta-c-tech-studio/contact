@@ -27,20 +27,11 @@ export default function ScalableArchitectureBlog() {
                     position: "relative",
                 }}
             >
-                <Typography
-                    variant="h3"
-                    component="h1"
-                    sx={{
-                        marginBottom: 2,
-                        fontWeight: 700,
-                        color: theme.palette.text.primary,
-                        fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-                    }}
-                >
+                <Typography variant="h4" component="h2" sx={{ marginTop: 4, marginBottom: 2, fontWeight: 600 }}>
                   Scalable Architecture
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary, marginBottom: 4 }}>
-                    Updated on August 14, 2025
+                    Updated on August 14, 2025 -Personal Research Notes
                 </Typography>
 
                 {/* Insert the scale cube image */}
@@ -58,14 +49,12 @@ export default function ScalableArchitectureBlog() {
                 </Box>
 
                 <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                    Building scalable systems is one of the most critical challenges in modern software architecture. The Scale
-                    Cube, introduced by Martin Abbott and Michael Fisher, provides a comprehensive framework for understanding how
-                    to scale applications across three fundamental dimensions. This architectural model has become essential
-                    knowledge for system designers and engineers working on high-traffic applications.
+                    The Scale Cube, introduced by Martin Abbott and Michael Fisher, provides a comprehensive framework for understanding how
+                    to scale applications across three  dimensions.
                 </Typography>
 
                 <Typography variant="h4" component="h2" sx={{ marginTop: 4, marginBottom: 2, fontWeight: 600 }}>
-                    Understanding the Three Dimensions of Scale
+                    Understanding  scalable architecture
                 </Typography>
 
                 <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>

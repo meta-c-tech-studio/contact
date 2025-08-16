@@ -38,7 +38,7 @@ export default function DataPipelineBlog() {
                     Understanding Data Pipelines
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary, marginBottom: 4 }}>
-                    Updated on August 10, 2025
+                    Updated on August 10, 2025 - Bytebytego
                 </Typography>
 
                 {/* Insert the image here */}

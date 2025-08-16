@@ -3,7 +3,7 @@
 import { Box, Typography, Button, Link } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 
-export default function BlogCard({ title, summary, slug }) {
+export default function BlogCard({ title, summary, slug, date }) {
     const theme = useTheme()
 
     return (
@@ -17,6 +17,7 @@ export default function BlogCard({ title, summary, slug }) {
                 width: "100%",
                 maxWidth: 800,
                 boxSizing: "border-box",
+                position: "relative",
             }}
         >
             <Typography
@@ -34,6 +35,21 @@ export default function BlogCard({ title, summary, slug }) {
             <Typography variant="body2" sx={{ color: theme.palette.text.secondary, marginBottom: 2 }}>
                 {summary}
             </Typography>
+
+            {/* Date in bottom right corner */}
+            <Typography
+                variant="caption"
+                sx={{
+                    position: "absolute",
+                    bottom: 16,
+                    right: 16,
+                    color: theme.palette.text.secondary,
+                    fontSize: "0.75rem",
+                }}
+            >
+                {date}
+            </Typography>
+
             <Link href={`/blog/${slug}`} underline="none">
                 <Button
                     variant="outlined"

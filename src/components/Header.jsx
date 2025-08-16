@@ -6,7 +6,9 @@ export default function Header() {
     const navLinks = [
         { name: "Programming Exercise", href: "/programming-exercise" },
         { name: "AI Coding", href: "/ai-coding" }, // New AI Coding link
+        { name: "Giit", href: "/giit" }, // Add Giit to navigation
         { name: "Blog", href: "/blog" },
+        { name: "Sports", href: "/sports" },
     ]
 
     return (

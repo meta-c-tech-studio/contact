@@ -12,6 +12,7 @@ export default function Footer() {
             links: [
                 { name: "Programming Exercise", href: "/programming-exercise" },
                 { name: "AI coding", href: "/ai-coding" },
+                { name: "Giit", href: "/giit" },
                 { name: "Blog", href: "/blog" },
                 { name: "Integrations", href: "#" },
             ],

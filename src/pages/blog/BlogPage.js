@@ -1,43 +1,31 @@
-import { Box, Typography } from "@mui/material"
-import Header from "../../components/Header"
-import Footer from "../../components/Footer"
-import BlogCard from "./components/BlogCard";
+"use client"
 
-// Update the blog post data
-const blogPosts = [
-    {
-        id: "1",
-        title: "Understanding Data Pipelines",
-        summary:
-            "Explore the fundamentals of data pipelines, their stages, and why they are crucial for modern data processing and analysis.",
-        slug: "understanding-data-pipelines",
-    },
-    {
-        id: "2",
-        title: "Scalable Architecture",
-        summary:
-            "Deep dive into the Scale Cube framework covering X-axis horizontal scaling, Y-axis services decomposition, and Z-axis data sharding for building robust, scalable systems.",
-        slug: "scalable-architecture-three-dimensions",
-    },
-]
+import { Box, Typography } from "@mui/material"
+import Header from "../../components/Header.jsx"
+import Footer from "../../components/Footer.jsx"
+import BlogCard from "./components/BlogCard"
+import { getAllBlogPosts } from "./components/blogRegistry"
 
 export default function BlogPage() {
+    // 自动提取所有blog元数据
+    const blogPosts = getAllBlogPosts()
+
     return (
         <Box
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                minHeight: "100vh", // Ensure the page takes full viewport height
+                minHeight: "100vh",
             }}
         >
             <Header />
             <Box
                 sx={{
-                    flexGrow: 1, // Allows the content area to expand and push footer down
+                    flexGrow: 1,
                     display: "flex",
-                    flexDirection: "column", // Allow content to stack vertically
-                    alignItems: "center", // Center content horizontally
-                    paddingY: { xs: 3, sm: 5, md: 8 }, // Responsive vertical padding
+                    flexDirection: "column",
+                    alignItems: "center",
+                    paddingY: { xs: 3, sm: 5, md: 8 },
                     boxSizing: "border-box",
                 }}
             >
@@ -54,9 +42,9 @@ export default function BlogPage() {
                 >
                     Blog
                 </Typography>
-                {/* Render blog cards */}
+                {/* 动态渲染blog卡片 */}
                 {blogPosts.map((post) => (
-                    <BlogCard key={post.id} title={post.title} summary={post.summary} slug={post.slug} />
+                    <BlogCard key={post.id} title={post.title} summary={post.summary} slug={post.slug} date={post.date} />
                 ))}
             </Box>
             <Footer />
