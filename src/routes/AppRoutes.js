@@ -7,6 +7,7 @@ import AICodingPage from "../pages/ai-coding/AICodingPage";
 import RepositoryPage from "../pages/giit/repository/[id]";
 import GiitPage from "../pages/giit/GiitPage";
 import SportsPage from "../pages/sports/SportsPage";
+import ReadingListPage from "../pages/blog/lists/reading-list-blog";
 
 export default function AppRoutes() {
     return (
@@ -19,7 +20,7 @@ export default function AppRoutes() {
             <Route path="/giit" element={<GiitPage />} /> {/* Giit main page */}
             <Route path="/giit/repository/:id" element={<RepositoryPage />} />
             <Route path="/sports" element={<SportsPage />} />
-
+            <Route path="/blog/reading-list" element={<ReadingListPage />} />
         </Routes>
     )
 }

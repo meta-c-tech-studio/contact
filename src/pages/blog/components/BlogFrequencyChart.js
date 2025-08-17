@@ -1,4 +1,3 @@
-"use client"
 import { Box, Typography, useTheme } from "@mui/material"
 
 const BlogFrequencyChart = ({ data, title = "Blog Publishing Frequency", subtitle = "Posts published over time" }) => {
@@ -42,10 +41,11 @@ const BlogFrequencyChart = ({ data, title = "Blog Publishing Frequency", subtitl
         return path
     }
 
-    // Chart dimensions
-    const width = 800
-    const height = 300
-    const padding = 60
+    // Responsive chart dimensions
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768
+    const width = isMobile ? 350 : 800
+    const height = isMobile ? 200 : 300
+    const padding = isMobile ? 40 : 60
 
     // Handle edge cases
     if (!data || data.length === 0) {
@@ -53,9 +53,9 @@ const BlogFrequencyChart = ({ data, title = "Blog Publishing Frequency", subtitl
             <Box
                 sx={{
                     width: "100%",
-                    maxWidth: "900px",
+                    maxWidth: { xs: "100%", sm: "900px" },
                     margin: "0 auto",
-                    padding: 3,
+                    padding: { xs: 2, sm: 3 },
                     backgroundColor: "background.paper",
                     borderRadius: 3,
                     boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
@@ -90,13 +90,14 @@ const BlogFrequencyChart = ({ data, title = "Blog Publishing Frequency", subtitl
         <Box
             sx={{
                 width: "100%",
-                maxWidth: "900px",
+                maxWidth: { xs: "100%", sm: "900px" },
                 margin: "0 auto",
-                padding: 3,
+                padding: { xs: 2, sm: 3 },
                 backgroundColor: "background.paper",
-                borderRadius: 3,
+                borderRadius: { xs: 2, sm: 3 },
                 boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                mb: 4,
+                mb: { xs: 1, sm: 4 },
+                overflow: "hidden",
             }}
         >
             <Typography
@@ -105,6 +106,8 @@ const BlogFrequencyChart = ({ data, title = "Blog Publishing Frequency", subtitl
                     fontWeight: 600,
                     color: "text.primary",
                     mb: 1,
+                    fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+                    textAlign: { xs: "center", sm: "left" },
                 }}
             >
                 {title}
@@ -113,14 +116,33 @@ const BlogFrequencyChart = ({ data, title = "Blog Publishing Frequency", subtitl
                 variant="body1"
                 sx={{
                     color: "text.secondary",
-                    mb: 3,
+                    mb: { xs: 1, sm: 3 },
+                    fontSize: { xs: "0.875rem", sm: "1rem" },
+                    textAlign: { xs: "center", sm: "left" },
                 }}
             >
                 {subtitle}
             </Typography>
 
-            <Box sx={{ width: "100%", overflow: "hidden" }}>
-                <svg width="100%" height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: "block" }}>
+            <Box
+                sx={{
+                    width: "100%",
+                    overflow: "hidden",
+                    display: "flex",
+                    justifyContent: "center",
+                }}
+            >
+                <svg
+                    width="100%"
+                    height={height}
+                    viewBox={`0 0 ${width} ${height}`}
+                    style={{
+                        display: "block",
+                        maxWidth: "100%",
+                        height: "auto",
+                    }}
+                    preserveAspectRatio="xMidYMid meet"
+                >
                     {/* Gradient definitions - Blue to Green */}
                     <defs>
                         <linearGradient id="blogGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -159,7 +181,7 @@ const BlogFrequencyChart = ({ data, title = "Blog Publishing Frequency", subtitl
                                 x={padding - 10}
                                 y={padding + ratio * (height - 2 * padding) + 5}
                                 textAnchor="end"
-                                fontSize="12"
+                                fontSize={isMobile ? "10" : "12"}
                                 fill="#64748b"
                             >
                                 {Math.round(maxValue - ratio * valueRange)}
@@ -175,7 +197,7 @@ const BlogFrequencyChart = ({ data, title = "Blog Publishing Frequency", subtitl
                         d={smoothPath}
                         fill="none"
                         stroke="url(#lineGradient)"
-                        strokeWidth="3"
+                        strokeWidth={isMobile ? "2" : "3"}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         filter="url(#glow)"
@@ -187,22 +209,28 @@ const BlogFrequencyChart = ({ data, title = "Blog Publishing Frequency", subtitl
                             <circle
                                 cx={point.x}
                                 cy={point.y}
-                                r="6"
+                                r={isMobile ? "4" : "6"}
                                 fill="white"
                                 stroke={point.label === "Aug 25" ? "#10b981" : "#06b6d4"} // Highlight August
-                                strokeWidth="3"
+                                strokeWidth={isMobile ? "2" : "3"}
                                 style={{ cursor: "pointer" }}
                                 filter="url(#glow)"
                             />
-                            <text x={point.x} y={height - padding + 20} textAnchor="middle" fontSize="12" fill="#475569">
+                            <text
+                                x={point.x}
+                                y={height - padding + (isMobile ? 15 : 20)}
+                                textAnchor="middle"
+                                fontSize={isMobile ? "9" : "12"}
+                                fill="#475569"
+                            >
                                 {point.label}
                             </text>
                             {/* Show value above point */}
                             <text
                                 x={point.x}
-                                y={point.y - 15}
+                                y={point.y - (isMobile ? 10 : 15)}
                                 textAnchor="middle"
-                                fontSize="12"
+                                fontSize={isMobile ? "10" : "12"}
                                 fill={point.label === "Aug 25" ? "#10b981" : "#06b6d4"}
                                 fontWeight="bold"
                             >

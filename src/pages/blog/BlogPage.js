@@ -1,5 +1,3 @@
-"use client"
-
 import { Box, Typography } from "@mui/material"
 import Header from "../../components/Header.jsx"
 import Footer from "../../components/Footer.jsx"
@@ -7,6 +5,7 @@ import BlogCard from "./components/BlogCard"
 import BlogFrequencyChart from "./components/BlogFrequencyChart"
 import { getBlogStats } from "../../services/blogAnalyticsService.js"
 import {getAllBlogPosts} from "./components/blogRegistry";
+import ReadingListCard from "./components/ReadingListCard";
 
 export default function BlogPage() {
     // Get all blog posts using your existing function
@@ -55,7 +54,10 @@ export default function BlogPage() {
                     title="Publishing Activity"
                     subtitle={`${blogStats.totalPosts} total posts • Most active in ${blogStats.mostProductiveMonth} with ${blogStats.maxPostsInMonth} posts`}
                 />
-
+                {/* Reading List Card */}
+                <Box sx={{ width: "100%", maxWidth: "900px", marginBottom: { xs: 2, sm: 3 } }}>
+                    <ReadingListCard />
+                </Box>
                 {/* Blog Posts */}
                 <Box sx={{ width: "100%", maxWidth: "800px" }}>
                     {blogPosts.map((post) => (

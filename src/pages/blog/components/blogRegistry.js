@@ -1,9 +1,11 @@
 // 组件注册表
+
 import GEOOptimizationBlog from "../lists/geo-optimization-blog";
-import DataPipelineBlog from "../lists/data-pipline-blog";
 import ScalableArchitectureBlog from "../lists/scalable-architecture-blog";
+import DataPipelineBlog from "../lists/data-pipline-blog";
 
 const blogRegistry = [
+
     {
         slug: "understanding-data-pipelines",
         component: DataPipelineBlog,
@@ -19,7 +21,6 @@ const blogRegistry = [
 ]
 
 const extractMetadataFromComponent = (component, slug, index) => {
-
     const metadata = {
         id: (index + 1).toString(),
         slug: slug,
@@ -27,6 +28,20 @@ const extractMetadataFromComponent = (component, slug, index) => {
         summary: "",
         date: "",
         dateSort: "",
+        isPinned: false,
+    }
+
+    // Special handling for reading list
+    if (slug === "reading-list") {
+        return {
+            ...metadata,
+            title: "📚 My Reading List",
+            summary:
+                "I have read 150+ books over the last five years. Here are the technical books I highly recommend! Explore my curated collection with interactive 3D book covers.",
+            date: "Pinned",
+            dateSort: "9999-12-31", // Always at top
+            isPinned: true,
+        }
     }
 
     try {
@@ -74,22 +89,26 @@ const extractMetadataFromComponent = (component, slug, index) => {
 
     return metadata
 }
+
 const getFallbackData = (slug) => {
     const fallbackMap = {
         "understanding-data-pipelines": {
             title: "Understanding Data Pipelines",
-            summary:
-                "Collect, process, and analyze vast amounts of information for businesses and organizations.",
+            summary: "Collect, process, and analyze vast amounts of information for businesses and organizations.",
+            date: "August 10, 2025",
+            dateSort: "2025-08-10",
         },
         "scalable-architecture-three-dimensions": {
             title: "Scalable Architecture: The Three Dimensions of Scale",
-            summary:
-                "The Three Dimensions of Scale",
+            summary: "The Three Dimensions of Scale",
+            date: "August 14, 2025",
+            dateSort: "2025-08-14",
         },
         "geo-optimization-ai-era": {
             title: "Understanding AI Recommendation Mechanisms: The Essence of GEO",
-            summary:
-                "Understanding AI Recommendation Mechanisms",
+            summary: "Understanding AI Recommendation Mechanisms",
+            date: "August 16, 2025",
+            dateSort: "2025-08-16",
         },
     }
 
@@ -97,7 +116,8 @@ const getFallbackData = (slug) => {
         fallbackMap[slug] || {
             title: "Blog Post",
             summary: "Blog post summary",
-            dateSort: "1970-01-01",
+            date: "January 1, 2025",
+            dateSort: "2025-01-01",
         }
     )
 }
@@ -117,8 +137,12 @@ export const getAllBlogPosts = () => {
         return extractMetadataFromComponent(blog.component, blog.slug, index)
     })
 
-    // 按日期排序（最新在前）
-    return blogPosts.sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort))
+    // 按日期排序（置顶文章在前，然后按日期排序）
+    return blogPosts.sort((a, b) => {
+        if (a.isPinned && !b.isPinned) return -1
+        if (!a.isPinned && b.isPinned) return 1
+        return new Date(b.dateSort) - new Date(a.dateSort)
+    })
 }
 
 export const getBlogPostBySlug = (slug) => {

@@ -1,5 +1,3 @@
-"use client"
-
 import { useParams } from "react-router-dom"
 import { Box, Typography } from "@mui/material"
 import Header from "../../components/Header.jsx"

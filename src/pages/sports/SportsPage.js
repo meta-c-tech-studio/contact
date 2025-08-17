@@ -127,7 +127,7 @@ export default function SportsPage() {
                     }}
                 >
                     <Box component="span" sx={{ color: theme.palette.primary.main }}>
-                        Global Sports
+                         Sports
                     </Box>{" "}
                     Finder
                 </Typography>
