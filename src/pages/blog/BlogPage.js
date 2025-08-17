@@ -4,11 +4,16 @@ import { Box, Typography } from "@mui/material"
 import Header from "../../components/Header.jsx"
 import Footer from "../../components/Footer.jsx"
 import BlogCard from "./components/BlogCard"
-import { getAllBlogPosts } from "./components/blogRegistry"
+import BlogFrequencyChart from "./components/BlogFrequencyChart"
+import { getBlogStats } from "../../services/blogAnalyticsService.js"
+import {getAllBlogPosts} from "./components/blogRegistry";
 
 export default function BlogPage() {
-    // 自动提取所有blog元数据
+    // Get all blog posts using your existing function
     const blogPosts = getAllBlogPosts()
+
+    // Generate blog statistics
+    const blogStats = getBlogStats()
 
     return (
         <Box
@@ -26,6 +31,7 @@ export default function BlogPage() {
                     flexDirection: "column",
                     alignItems: "center",
                     paddingY: { xs: 3, sm: 5, md: 8 },
+                    paddingX: { xs: 2, sm: 3 },
                     boxSizing: "border-box",
                 }}
             >
@@ -42,10 +48,20 @@ export default function BlogPage() {
                 >
                     Blog
                 </Typography>
-                {/* 动态渲染blog卡片 */}
-                {blogPosts.map((post) => (
-                    <BlogCard key={post.id} title={post.title} summary={post.summary} slug={post.slug} date={post.date} />
-                ))}
+
+                {/* Blog Frequency Chart */}
+                <BlogFrequencyChart
+                    data={blogStats.frequencyData}
+                    title="Publishing Activity"
+                    subtitle={`${blogStats.totalPosts} total posts • Most active in ${blogStats.mostProductiveMonth} with ${blogStats.maxPostsInMonth} posts`}
+                />
+
+                {/* Blog Posts */}
+                <Box sx={{ width: "100%", maxWidth: "800px" }}>
+                    {blogPosts.map((post) => (
+                        <BlogCard key={post.id} title={post.title} summary={post.summary} slug={post.slug} date={post.date} />
+                    ))}
+                </Box>
             </Box>
             <Footer />
         </Box>

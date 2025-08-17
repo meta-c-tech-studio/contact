@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { Box, Typography, Alert, CircularProgress, Tabs, Tab } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
-import Header from "../../components/Header"
-import Footer from "../../components/Footer"
+import Header from "../../components/Header.jsx"
+import Footer from "../../components/Footer.jsx"
 import SportsMap from "./components/SportsMap"
 import { MapPin, Activity, Mountain, TreePine } from "lucide-react"
 
@@ -52,7 +52,7 @@ export default function SportsPage() {
                 setLocationError(errorMessage)
                 setIsLoadingLocation(false)
 
-                // 设置默认位置（例如：纽约市中心）
+                // Set default location (New York City for global demo)
                 setUserLocation({
                     lat: 40.7128,
                     lng: -74.006,
@@ -75,7 +75,7 @@ export default function SportsPage() {
             id: "volleyball",
             name: "Volleyball Clubs",
             icon: <Activity size={20} />,
-            description: "Find volleyball clubs and courts ",
+            description: "Find volleyball clubs and courts near you worldwide",
             searchQuery: "volleyball",
             amenity: "sport=volleyball",
         },
@@ -83,7 +83,7 @@ export default function SportsPage() {
             id: "running",
             name: "Running Parks",
             icon: <TreePine size={20} />,
-            description: "Discover parks and trails perfect for running",
+            description: "Discover parks and trails perfect for running globally",
             searchQuery: "park running",
             amenity: "leisure=park",
         },
@@ -91,7 +91,7 @@ export default function SportsPage() {
             id: "skiing",
             name: "Skiing Areas",
             icon: <Mountain size={20} />,
-            description: "Find ski resorts and winter sports facilities",
+            description: "Find ski resorts and winter sports facilities worldwide",
             searchQuery: "ski resort",
             amenity: "sport=skiing",
         },
@@ -127,7 +127,7 @@ export default function SportsPage() {
                     }}
                 >
                     <Box component="span" sx={{ color: theme.palette.primary.main }}>
-                        Sports
+                        Global Sports
                     </Box>{" "}
                     Finder
                 </Typography>
@@ -140,8 +140,33 @@ export default function SportsPage() {
                         margin: "0 auto 2rem auto",
                     }}
                 >
-                    Discover sports facilities and outdoor activities 
+                    Discover sports facilities and outdoor activities anywhere in the world 🌍
                 </Typography>
+
+                {/* Global Coverage Info */}
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                        gap: 2,
+                        marginBottom: 3,
+                    }}
+                >
+           
+                    <Box
+                        sx={{
+                            padding: "8px 16px",
+                            backgroundColor: theme.palette.primary.main,
+                            color: "white",
+                            borderRadius: 2,
+                            fontSize: "0.875rem",
+                            fontWeight: 600,
+                        }}
+                    >
+                        🌍 190 + Countries
+                    </Box>
+                </Box>
 
                 {/* Location Status */}
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 1, marginBottom: 2 }}>
@@ -169,7 +194,7 @@ export default function SportsPage() {
                         {locationError}
                         {userLocation && (
                             <Typography variant="body2" sx={{ marginTop: 1 }}>
-                                Using default location for demonstration.
+                                Using New York City as default location for demonstration.
                             </Typography>
                         )}
                     </Alert>
@@ -206,7 +231,7 @@ export default function SportsPage() {
                 </Box>
 
                 {/* Map Content */}
-                {userLocation && (
+                {userLocation && sportsCategories[currentTab] && (
                     <Box>
                         <Typography
                             variant="h5"
@@ -254,7 +279,7 @@ export default function SportsPage() {
                             Location Required
                         </Typography>
                         <Typography variant="body2" sx={{ color: theme.palette.text.secondary, marginBottom: 2 }}>
-                            Please enable location access to find sports facilities near you.
+                            Please enable location access to find sports facilities near you anywhere in the world.
                         </Typography>
                         <button
                             onClick={getCurrentLocation}
