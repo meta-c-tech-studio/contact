@@ -6,6 +6,7 @@ import BlogFrequencyChart from "./components/BlogFrequencyChart"
 import { getBlogStats } from "../../services/blogAnalyticsService.js"
 import {getAllBlogPosts} from "./components/blogRegistry";
 import ReadingListCard from "./components/ReadingListCard";
+import ToolsShowcase from "./components/ToolsShowcase";
 
 export default function BlogPage() {
     // Get all blog posts using your existing function
@@ -57,6 +58,10 @@ export default function BlogPage() {
                 {/* Reading List Card */}
                 <Box sx={{ width: "100%", maxWidth: "900px", marginBottom: { xs: 2, sm: 3 } }}>
                     <ReadingListCard />
+                </Box>
+                {/* Reading List Card */}
+                <Box sx={{ width: "100%", maxWidth: "900px", marginBottom: { xs: 2, sm: 3 } }}>
+              <ToolsShowcase/>
                 </Box>
                 {/* Blog Posts */}
                 <Box sx={{ width: "100%", maxWidth: "800px" }}>

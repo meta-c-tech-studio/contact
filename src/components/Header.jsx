@@ -5,8 +5,8 @@ export default function Header() {
     const theme = useTheme()
     const navLinks = [
         { name: "Programming Exercise", href: "/programming-exercise" },
-        { name: "AI Coding", href: "/ai-coding" }, // New AI Coding link
-        { name: "Giit", href: "/giit" }, // Add Giit to navigation
+        { name: "AI Automation", href: "/ai-coding" }, // New AI Coding link
+        // { name: "Giit", href: "/giit" }, // Add Giit to navigation
         { name: "Blog", href: "/blog" },
         { name: "Sports", href: "/sports" },
     ]

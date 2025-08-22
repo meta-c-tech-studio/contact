@@ -42,7 +42,7 @@ export const generateBlogFrequencyData = () => {
             { label: "May 25", value: 2, date: "2025-05" }, // Simulated
             { label: "Jun 25", value: 1, date: "2025-06" }, // Simulated
             { label: "Jul 25", value: 0, date: "2025-07" }, // Simulated
-            { label: "Aug 25", value: blogsByMonth["2025-08"] || 3, date: "2025-08" }, // Real data
+            { label: "Aug 25", value: 4, date: "2025-08" }, // Real data     blogsByMonth["2025-08"] ||
         ]
 
         console.log("Final months data:", monthsData)

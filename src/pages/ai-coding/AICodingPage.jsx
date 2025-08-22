@@ -122,9 +122,7 @@ export default function AICodingPage() {
                     <Typography variant="h4" component="h1" sx={{ color: theme.palette.text.primary, fontWeight: 700 }}>
                         AI Code Generator
                     </Typography>
-                    <Typography variant="body1" sx={{ color: theme.palette.text.secondary, marginBottom: 2 }}>
-                        Describe the code you need, and our AI will generate it for you using Groq's model.
-                    </Typography>
+                 
 
                 
 
@@ -178,7 +176,7 @@ export default function AICodingPage() {
                         }}
                     >
                         <Typography variant="subtitle2" sx={{ color: theme.palette.text.primary, marginBottom: 1 }}>
-                            🚀 Powered by Groq 
+                            🚀 Powered by Grok
                         </Typography>
                         <Typography variant="body2" sx={{ color: theme.palette.text.secondary, fontSize: "0.85rem" }}>
                             • Model: Llama 3.1 8B Instant

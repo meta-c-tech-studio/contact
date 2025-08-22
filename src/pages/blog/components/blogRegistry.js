@@ -1,11 +1,17 @@
 // 组件注册表
 
+
 import GEOOptimizationBlog from "../lists/geo-optimization-blog";
 import ScalableArchitectureBlog from "../lists/scalable-architecture-blog";
 import DataPipelineBlog from "../lists/data-pipline-blog";
+import CurrencyExchangeBlog from "../lists/currency-exchange-blog";
 
 const blogRegistry = [
-
+    {
+        slug: "currency-exchange",
+        component: CurrencyExchangeBlog,
+        isPinned: true,
+    },
     {
         slug: "understanding-data-pipelines",
         component: DataPipelineBlog,
@@ -29,6 +35,12 @@ const extractMetadataFromComponent = (component, slug, index) => {
         date: "",
         dateSort: "",
         isPinned: false,
+    }
+
+    // 从注册表中获取isPinned属性
+    const registryEntry = blogRegistry.find((blog) => blog.slug === slug)
+    if (registryEntry) {
+        metadata.isPinned = registryEntry.isPinned || false
     }
 
     // Special handling for reading list
@@ -114,10 +126,10 @@ const getFallbackData = (slug) => {
 
     return (
         fallbackMap[slug] || {
-            title: "Blog Post",
-            summary: "Blog post summary",
-            date: "January 1, 2025",
-            dateSort: "2025-01-01",
+            title: "Tools",
+            summary: "",
+            date: "August 20, 2025",
+            dateSort: "2025-08-20",
         }
     )
 }
@@ -160,4 +172,16 @@ export const getBlogComponents = () => {
         components[blog.slug] = blog.component
     })
     return components
+}
+
+// 获取置顶的工具类博客
+export const getPinnedToolBlogs = () => {
+    const allBlogs = getAllBlogPosts()
+    return allBlogs.filter((blog) => blog.isPinned && blog.slug !== "reading-list")
+}
+
+// 获取非置顶的普通博客
+export const getRegularBlogs = () => {
+    const allBlogs = getAllBlogPosts()
+    return allBlogs.filter((blog) => !blog.isPinned)
 }

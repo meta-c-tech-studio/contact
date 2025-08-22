@@ -358,6 +358,41 @@ export default function GEOOptimizationBlog() {
                     this change.
                 </Typography>
             </Box>
+                {/* Sunset Image */}
+                <Box
+                    sx={{
+                        marginTop: 3,
+                        borderRadius: 2,
+                        overflow: "hidden",
+                        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
+                    }}
+                >
+                    <img
+                        src="/blogs/sunset-reflection.jpg"
+                        alt="Evening sunset over an open field with trees silhouetted against the sky - a moment of peaceful reflection"
+                        style={{
+                            width: "100%",
+                            height: "auto",
+                            display: "block",
+                            maxHeight: "700px",
+                            objectFit: "cover",
+                        }}
+                    />
+                </Box>
+
+                <Typography
+                    variant="caption"
+                    sx={{
+                        display: "block",
+                        textAlign: "center",
+                        marginTop: 2,
+                        color: theme.palette.text.secondary,
+                        fontStyle: "italic",
+                    }}
+                >
+                    Aug 2025 
+                </Typography>
+
         </Box>
     )
 }
