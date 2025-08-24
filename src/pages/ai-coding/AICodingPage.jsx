@@ -1,9 +1,13 @@
+"use client"
+
 import { useState, useCallback } from "react"
 import { Box, Typography, TextField, Button, CircularProgress, Alert } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 import Header from "../../components/Header.jsx"
 import Footer from "../../components/Footer.jsx"
 import AICodeOutput from "./components/AICodeOutput.jsx"
+import VisualCanvas from "./components/VisualCanvas.jsx"
+
 export default function AICodingPage() {
     const theme = useTheme()
     const [prompt, setPrompt] = useState("")
@@ -16,78 +20,35 @@ export default function AICodingPage() {
         setPrompt(e.target.value)
     }, [])
 
+    // 简化画布变化处理，避免重复文本
+    const handleCanvasChange = useCallback((canvasPrompt) => {
+        // 暂时禁用自动更新，避免重复文本问题
+        console.log("Canvas changed:", canvasPrompt)
+    }, [])
+
     const handleGenerateCode = useCallback(async () => {
         setIsLoading(true)
         setError("")
-        setGeneratedCode("") // Clear previous code
+        setGeneratedCode("")
 
         try {
-            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            const response = await fetch("https://api.contact.reene4444.com/api/generate-code", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${process.env.REACT_APP_GROQ_API_KEY}`,
-                },
-                body: JSON.stringify({
-                    model: "llama-3.1-8b-instant",
-                    messages: [
-                        {
-                            role: "system",
-                            content: `You are a helpful coding assistant. Generate clean, well-commented code based on the user's request. 
-              Default to Python unless another language is specifically requested. 
-              Only return the code, no explanations or markdown formatting.`,
-                        },
-                        {
-                            role: "user",
-                            content: prompt,
-                        },
-                    ],
-                    max_tokens: 2048,
-                    temperature: 0.3,
-                    stream: false,
-                }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt }),
             })
 
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}))
-                throw new Error(errorData.error?.message || `HTTP error! status: ${response.status} - ${response.statusText}`)
-            }
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
 
             const data = await response.json()
-
-            if (data.choices && data.choices.length > 0) {
-                const generatedText = data.choices[0].message.content.trim()
-
-                // Try to detect language from the generated code
-                let detectedLanguage = language
-                if (generatedText.includes("def ") || generatedText.includes("import ") || generatedText.includes("print(")) {
-                    detectedLanguage = "python"
-                } else if (
-                    generatedText.includes("function ") ||
-                    generatedText.includes("const ") ||
-                    generatedText.includes("console.log")
-                ) {
-                    detectedLanguage = "javascript"
-                } else if (
-                    generatedText.includes("public class") ||
-                    generatedText.includes("System.out.println") ||
-                    generatedText.includes("public static void main")
-                ) {
-                    detectedLanguage = "java"
-                }
-
-                setLanguage(detectedLanguage)
-                setGeneratedCode(generatedText)
-            } else {
-                throw new Error("No code generated. Please try again with a different prompt.")
-            }
+            setLanguage(data.language || "python")
+            setGeneratedCode(data.code || "")
         } catch (err) {
-            console.error("Error generating code:", err)
             setError(err.message || "Failed to generate code. Please try again.")
         } finally {
             setIsLoading(false)
         }
-    }, [prompt, language])
+    }, [prompt])
 
     return (
         <Box
@@ -120,11 +81,12 @@ export default function AICodingPage() {
                     }}
                 >
                     <Typography variant="h4" component="h1" sx={{ color: theme.palette.text.primary, fontWeight: 700 }}>
-                        AI Code Generator
+                        Visual AI Code Generator
                     </Typography>
-                 
-
-                
+                    <Typography variant="body1" sx={{ color: theme.palette.text.secondary, marginBottom: 2 }}>
+                        Describe the code you want to generate, and see the automatic mind map visualization with enhanced canvas
+                        features.
+                    </Typography>
 
                     <TextField
                         label="Code Description"
@@ -155,7 +117,7 @@ export default function AICodingPage() {
                         disabled={isLoading || !prompt.trim()}
                         sx={{ padding: "12px 24px", fontSize: "1rem", fontWeight: 600 }}
                     >
-                        {isLoading ? <CircularProgress size={24} color="inherit" /> : "Generate Code"}
+                        {isLoading ? <CircularProgress size={24} color="inherit" /> : "Generate Code & Mind Map"}
                     </Button>
 
                     {error && (
@@ -166,7 +128,7 @@ export default function AICodingPage() {
                         </Alert>
                     )}
 
-                    {/* Usage Info */}
+                    {/* Enhanced Usage Info */}
                     <Box
                         sx={{
                             padding: 2,
@@ -176,19 +138,35 @@ export default function AICodingPage() {
                         }}
                     >
                         <Typography variant="subtitle2" sx={{ color: theme.palette.text.primary, marginBottom: 1 }}>
-                            🚀 Powered by Grok
+                            🚀 Powered by Groq
                         </Typography>
                         <Typography variant="body2" sx={{ color: theme.palette.text.secondary, fontSize: "0.85rem" }}>
                             • Model: Llama 3.1 8B Instant
                             <br />• Frequency: 30 requests/minute
-                       
                         </Typography>
+
                     </Box>
                 </Box>
 
-                {/* Right Panel: Generated Code Output */}
-                <Box sx={{ flex: 1, minHeight: { xs: "400px", md: "auto" } }}>
-                    <AICodeOutput code={generatedCode} language={language} />
+                {/* Right Panel: Visual Canvas + Generated Code Output */}
+                <Box
+                    sx={{
+                        flex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 3,
+                        minHeight: { xs: "600px", md: "auto" },
+                    }}
+                >
+                    {/* Enhanced Visual Canvas - Upper Half */}
+                    <Box sx={{ height: { xs: "350px", md: "45%" }, minHeight: "350px" }}>
+                        <VisualCanvas onCanvasChange={handleCanvasChange} generatedCode={generatedCode} language={language} />
+                    </Box>
+
+                    {/* Generated Code Output - Lower Half */}
+                    <Box sx={{ height: { xs: "400px", md: "55%" }, minHeight: "400px" }}>
+                        <AICodeOutput code={generatedCode} language={language} />
+                    </Box>
                 </Box>
             </Box>
             <Footer />

@@ -3,18 +3,33 @@
 
 import GEOOptimizationBlog from "../lists/geo-optimization-blog";
 import ScalableArchitectureBlog from "../lists/scalable-architecture-blog";
-import DataPipelineBlog from "../lists/data-pipline-blog";
+// import DataPipelineBlog from "../lists/data-pipline-blog";
 import CurrencyExchangeBlog from "../lists/currency-exchange-blog";
+import TwoCommittedBlog from "../lists/TwoCommittedBlog";
+import RaftAlgorithmBlog from "../lists/RaftAlgorithmBlog";
+import A2AProtocolInAI from "../lists/A2AProtocolInAI";
 
 const blogRegistry = [
+    // {
+    //     slug: "currency-exchange",
+    //     component: CurrencyExchangeBlog,
+    //     isPinned: true,
+    // },
+    // {
+    //     slug: "understanding-data-pipelines",
+    //     component: DataPipelineBlog,
+    // },
+    // {
+    //     slug: "2-Phase Commit (2PC)",
+    //     component: TwoCommittedBlog,
+    // },
     {
-        slug: "currency-exchange",
-        component: CurrencyExchangeBlog,
-        isPinned: true,
+        slug: "A2A",
+        component: A2AProtocolInAI,
     },
     {
-        slug: "understanding-data-pipelines",
-        component: DataPipelineBlog,
+        slug: "Consensus",
+        component: RaftAlgorithmBlog,
     },
     {
         slug: "scalable-architecture-three-dimensions",
@@ -104,11 +119,29 @@ const extractMetadataFromComponent = (component, slug, index) => {
 
 const getFallbackData = (slug) => {
     const fallbackMap = {
-        "understanding-data-pipelines": {
-            title: "Understanding Data Pipelines",
-            summary: "Collect, process, and analyze vast amounts of information for businesses and organizations.",
-            date: "August 10, 2025",
-            dateSort: "2025-08-10",
+        // "understanding-data-pipelines": {
+        //     title: "Understanding Data Pipelines",
+        //     summary: "Collect, process, and analyze vast amounts of information for businesses and organizations.",
+        //     date: "August 10, 2025",
+        //     dateSort: "2025-08-10",
+        // },
+        // "2-Phase Commit (2PC)": {
+        //     title: "2-Phase Commit (2PC)",
+        //     summary: "2-Phase Commit Protocol",
+        //     date: "August 24, 2025",
+        //     dateSort: "2025-08-24",
+        // },
+        "A2A": {
+            title: "A2A",
+            summary: "A2A Protocol",
+            date: "August 24, 2025",
+            dateSort: "2025-08-24",
+        },
+        "Consensus": {
+            title: "Consensus",
+            summary: "Consensus mechanism",
+            date: "August 24, 2025",
+            dateSort: "2025-08-24",
         },
         "scalable-architecture-three-dimensions": {
             title: "Scalable Architecture: The Three Dimensions of Scale",

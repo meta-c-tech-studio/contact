@@ -61,7 +61,7 @@ export default function BlogPage() {
                 </Box>
                 {/* Reading List Card */}
                 <Box sx={{ width: "100%", maxWidth: "900px", marginBottom: { xs: 2, sm: 3 } }}>
-              <ToolsShowcase/>
+              {/*<ToolsShowcase/>*/}
                 </Box>
                 {/* Blog Posts */}
                 <Box sx={{ width: "100%", maxWidth: "800px" }}>
